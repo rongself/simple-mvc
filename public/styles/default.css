@@ -1,0 +1,26 @@
+body{
+    width: 100%;
+}
+.touchBtn {
+    display: block;
+    height: 250px;
+    width: 250px;
+    background-color: crimson;
+    border-radius: 250px;
+    font-size: 2rem;
+    font-family: fantasy;
+    color: #fff;
+    line-height: 250px;
+    text-align: center;
+    text-decoration: none;
+    margin-left: -50%;
+    margin-top: -50%;
+}
+
+.wrapper {
+    position: absolute;
+    height: 250px;
+    width: 250px;
+    top: 50%;
+    left: 50%;
+}

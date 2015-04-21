@@ -1,0 +1,13 @@
+{
+    "name": "rongself/rmvc",
+    "description": "my simple mvc framework",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "rongself",
+            "email": "rongself1991@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
