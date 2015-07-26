@@ -9,7 +9,8 @@
 namespace Wechat;
 
 
-class API {
+class API
+{
     /**
      * @var $config Config
      */
@@ -22,13 +23,13 @@ class API {
             'jsapi_ticket' => self::getJsApiTicket(),
             'noncestr' => $config->nonceStr,
             'timestamp' => $config->timestamp,
-            'url' => 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']
+            'url' => 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
         );
         $query = '';
         $i = 0;
-        foreach($signatureArray as $key=>$item){
+        foreach ($signatureArray as $key => $item) {
             $query .= "{$key}={$item}";
-            if($i+1!=count($signatureArray)){
+            if ($i + 1 != count($signatureArray)) {
                 $query .= '&';
             }
             $i++;
@@ -38,8 +39,8 @@ class API {
 
     private static function getAccessToken()
     {
-        $accessUrl = sprintf('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s',self::$config->appId,self::$config->secret);
-        $result = json_decode(file_get_contents($accessUrl),true);
+        $accessUrl = sprintf('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s', self::$config->appId, self::$config->secret);
+        $result = json_decode(file_get_contents($accessUrl), true);
         return $result['access_token'];
     }
 
@@ -48,8 +49,8 @@ class API {
      */
     private static function getJsApiTicket()
     {
-        $jsTicketUrl = sprintf('https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=%s&type=jsapi',self::getAccessToken());
-        $result = json_decode(file_get_contents($jsTicketUrl),true);
+        $jsTicketUrl = sprintf('https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=%s&type=jsapi', self::getAccessToken());
+        $result = json_decode(file_get_contents($jsTicketUrl), true);
         return $result['ticket'];
     }
 

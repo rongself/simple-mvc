@@ -30,6 +30,7 @@ class Config {
      */
     public function getConfig($key)
     {
+        if(!isset($this->configData[$key])) throw new ConfigurationException("Option {$key} is not defined");
         return $this->configData[$key];
     }
 

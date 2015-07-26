@@ -12,6 +12,8 @@ namespace Core;
 class View {
     protected $viewPath;
     protected $dataContainer = array();
+    public $controllerName;
+    public $actionName;
 
     function __get($name)
     {
@@ -44,6 +46,16 @@ class View {
     public function __destruct()
     {
         $this->render();
+    }
+
+    public function setControllerName($name)
+    {
+        $this->controllerName = $name;   
+    }
+
+    public function setActionName($name)
+    {
+        $this->actionName = $name;
     }
 
 }
