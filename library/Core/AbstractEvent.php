@@ -11,9 +11,9 @@ namespace Core;
 
 abstract class AbstractEvent {
     const CONTROLLER_DISPATCH = 'controllerDispatch';
-    const CONTROLLER_DISPATCHED = 'controllerDispatched';
+    const CONTROLLER_POST = 'controllerDispatched';
     public static $eventTypes = array(
         self::CONTROLLER_DISPATCH,
-        self::CONTROLLER_DISPATCHED,
+        self::CONTROLLER_POST,
     );
 }

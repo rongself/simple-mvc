@@ -9,12 +9,13 @@ namespace Application\Index;
 
 use Core\AbstractEvent;
 use Core\Application;
+use Core\EventManager;
 
 class Boot{
 
     public function init()
     {
-        Application::getEventManager()->on(AbstractEvent::CONTROLLER_DISPATCH,function($controller){
+        EventManager::getInstance()->on(AbstractEvent::CONTROLLER_DISPATCH,function($controller){
             /**@var $controller \Core\AbstractController */
             echo sprintf('this is index module,current controller is %s,action is %s.',$controller->getControllerName(),$controller->getActionName());
         });

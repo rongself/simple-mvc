@@ -72,7 +72,7 @@ abstract class AbstractController {
     }
 
     /**
-     * @return mixed
+     * @return \Core\View
      */
     public function getView()
     {
@@ -87,4 +87,10 @@ abstract class AbstractController {
         $this->view = $view;
     }
 
+    public function post()
+    {
+        $functionName = $this->getActionName() . 'Action';
+        call_user_func(array($this,$functionName));
+        echo $this->getView()->render();
+    }
 }

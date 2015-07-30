@@ -13,55 +13,48 @@ class Application
     /**
      * @var Config
      */
-    protected static $config;
+    protected $config;
+
+    /**
+     * @var BootManager
+     */
+    protected $bootManager;
 
     /**
      * @var EventManager
      */
-    protected static $eventManager;
+    protected  $eventManager;
 
-
-    public static function run(Config $config)
+    public function __construct(Config $config)
     {
-        self::$config = $config;
-        self::$eventManager = EventManager::getInstance();
-        $applicationNamespace = self::getConfig()->getConfig('applicationNamespace');
+        $this->config = $config;
+    }
 
-        $router = new Router($config->getConfig('routerOptions'));
-        $boot = new BootManager($router);
-        $boot->boot();
+
+    public function run()
+    {
+
+        if(!isset($this->bootManager))
+        {
+            $this->bootManager = new BootManager($this->config);
+        }
+        $this->bootManager->boot();
     }
 
     /**
-     * @return mixed
+     * @return Config
      */
-    public static function getConfig()
+    public function getConfig()
     {
-        return self::$config;
+        return $this->config;
     }
 
     /**
-     * @param array $config
+     * @param Config $config
      */
-    public static function setConfig($config)
+    public function setConfig($config)
     {
-        self::$config = $config;
-    }
-
-    /**
-     * @return EventManager
-     */
-    public static function getEventManager()
-    {
-        return self::$eventManager;
-    }
-
-    /**
-     * @param mixed $eventManager
-     */
-    public static function setEventManager($eventManager)
-    {
-        self::$eventManager = $eventManager;
+        $this->config = $config;
     }
 
 }

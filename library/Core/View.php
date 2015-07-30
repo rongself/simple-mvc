@@ -38,14 +38,11 @@ class View {
         $this->dataContainer[$key] = $value;
     }
 
-    protected function render()
+    public function render()
     {
+        ob_start();
         include_once($this->viewPath);
-    }
-
-    public function __destruct()
-    {
-        $this->render();
+        return ob_get_contents();
     }
 
     public function setControllerName($name)
@@ -56,6 +53,14 @@ class View {
     public function setActionName($name)
     {
         $this->actionName = $name;
+    }
+
+    /**
+     * @param array $dataContainer
+     */
+    public function setValues(array $values)
+    {
+        $this->dataContainer = $values;
     }
 
 }
