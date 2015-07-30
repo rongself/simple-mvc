@@ -5,6 +5,7 @@
  * Date: 2015/4/12
  * Time: 0:21
  */
+namespace Application;
 
 class Boot {
 
