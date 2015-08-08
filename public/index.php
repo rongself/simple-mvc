@@ -1,4 +1,5 @@
 <?php
+session_start();
 error_reporting(E_ALL);
 ini_set('display_errors','on');
 defined('APPLICATION_ROOT')||define('PROJECT_ROOT',realpath(__DIR__.'/..'));
@@ -16,15 +17,15 @@ spl_autoload_register(function($className){
 	include str_replace('\\',DIRECTORY_SEPARATOR,$className).'.php';
 });
 
-\Util\MemoryTrack::start();
-\Util\RunningTimeTrack::start();
+//\Util\MemoryTrack::start();
+//\Util\RunningTimeTrack::start();
 
 $config = new \Core\Config(PROJECT_ROOT.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'application.config.php');
 $app = new \Core\Application($config);
 $app->run();
 
-\Util\RunningTimeTrack::end();
-\Util\MemoryTrack::end();
-
-echo sprintf('用时:%ssec</br>',\Util\RunningTimeTrack::usage());
-echo sprintf('使用内存:%sk</br>',\Util\MemoryTrack::usage()/1024);
+//\Util\RunningTimeTrack::end();
+//\Util\MemoryTrack::end();
+//
+//echo sprintf('用时:%ssec</br>',\Util\RunningTimeTrack::usage());
+//echo sprintf('使用内存:%sk</br>',\Util\MemoryTrack::usage()/1024);

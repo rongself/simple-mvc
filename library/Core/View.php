@@ -14,6 +14,7 @@ class View {
     protected $dataContainer = array();
     public $controllerName;
     public $actionName;
+    protected $disableRender = false;
 
     function __get($name)
     {
@@ -40,9 +41,12 @@ class View {
 
     public function render()
     {
-        ob_start();
-        include_once($this->viewPath);
-        return ob_get_contents();
+        if (!$this->disableRender) {
+            ob_start();
+            include_once($this->viewPath);
+            return ob_get_contents();
+        }
+        return '';
     }
 
     public function setControllerName($name)
@@ -61,6 +65,11 @@ class View {
     public function setValues(array $values)
     {
         $this->dataContainer = $values;
+    }
+
+    public function disableRender()
+    {
+        $this->disableRender = true;
     }
 
 }

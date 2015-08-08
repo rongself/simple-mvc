@@ -15,6 +15,11 @@ abstract class AbstractController {
     protected $actionName;
     protected $params;
     /**
+     * @var \Core\DB\AbstractDbAdapter
+     */
+    protected $dbAdapter;
+
+    /**
      * @var $view \Core\View
      */
     protected $view;
@@ -93,4 +98,28 @@ abstract class AbstractController {
         call_user_func(array($this,$functionName));
         echo $this->getView()->render();
     }
+
+    /**
+     * @return DB\AbstractDbAdapter
+     */
+    public function getDbAdapter()
+    {
+        return $this->dbAdapter;
+    }
+
+    /**
+     * @param DB\AbstractDbAdapter $dbAdapter
+     */
+    public function setDbAdapter($dbAdapter)
+    {
+        $this->dbAdapter = $dbAdapter;
+    }
+
+    protected function json(array $data = array())
+    {
+        $this->getView()->disableRender();
+        header('Content-type: text/json');
+        echo json_encode($data);
+    }
+
 }
