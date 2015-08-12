@@ -44,7 +44,7 @@ class View {
         if (!$this->disableRender) {
             ob_start();
             include_once($this->viewPath);
-            return ob_get_contents();
+            return ob_get_clean();
         }
         return '';
     }

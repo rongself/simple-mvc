@@ -17,34 +17,41 @@ class HelpModel extends AbstractModel{
      * 鹊桥的长度
      */
     const TOTAL_DISTANCE = 100;
-    const HELP_TIMES = 10;
-
-    public $step = array(1,2,5,10,20,30);
+    const HELP_TIMES = 5;
 
     public function getRandomHelpDistance($userId)
     {
-        $helpedDistance = $this->getUserHelpDistance($userId);
         $helpedTimes = $this->getHelpTimes($userId);
-        if ($helpedTimes < self::HELP_TIMES) {
-
+        $leftDistance = $this->getLeftDistance($userId);
+        if ($helpedTimes < self::HELP_TIMES - 1) {
+            $distance =  floor($leftDistance*(rand(1,50)/100));
+        }else{
+            $distance = $leftDistance;
         }
+        return $distance;
+    }
+
+    public function getLeftDistance($userId)
+    {
+        $helpedDistance = $this->getUserHelpDistance($userId);
+        return self::TOTAL_DISTANCE - $helpedDistance;
     }
 
     public function getUserHelpDistance($userId)
     {
         $result = $this->db->query('select sum(distance) as `sum` from dsf_help where user_id = :userId group by user_id',array('userId' => $userId));
-        return $result[0]['sum'];
+        return empty($result) ? null:current($result)['sum'];
     }
 
     public function getHelpTimes($userId)
     {
         $result = $this->db->query('select count(*) as `count` from dsf_help where user_id = :userId',array('userId' => $userId));
-        return $result[0]['count'];
+        return empty($result) ? null:current($result)['count'];
     }
 
     public function getLastHelpTime($helperId,$userId)
     {
-        $result = $this->db->query('select create_time as createTime from dsf_help where helper_id = :helperId and user_id = :userId limit 1 order by id desc',array('helperId' => $helperId,'userId' => $userId));
-        return $result[0]['createTime'];
+        $result = $this->db->query('select create_time as createTime from dsf_help where helper_id = :helperId and user_id = :userId order by id desc limit 1 ',array('helperId' => $helperId,'userId' => $userId));
+        return empty($result) ? null:current($result)['createTime'];
     }
 }

@@ -110,7 +110,7 @@ abstract class AbstractController {
     /**
      * @param DB\AbstractDbAdapter $dbAdapter
      */
-    public function setDbAdapter($dbAdapter)
+    public function setDbAdapter(DB\AbstractDbAdapter $dbAdapter)
     {
         $this->dbAdapter = $dbAdapter;
     }

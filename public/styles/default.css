@@ -1,5 +1,11 @@
-body{
+body,html {
     width: 100%;
+    height: 100%;
+}
+body{
+    background: url("../images/bg.jpg") no-repeat;
+    background-size: cover;
+    font-family: Raleway, "微软雅黑", Arial, Helvetica, sans-serif;
 }
 .touchBtn {
     display: block;
@@ -23,4 +29,69 @@ body{
     width: 250px;
     top: 50%;
     left: 50%;
+}
+
+.layer-1 {
+    position:absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(0,0,0,0.8);
+}
+
+.layer-2 {
+    position:absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: rgba(0,0,0,0.8);
+}
+
+.main {
+    position:absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.rainbow {
+    width: 88.6%;
+    height: 14.4%;
+    margin-top: 14.7%;
+    margin-left: auto;
+    margin-right: auto;
+    background: url("../images/ch_05.png") no-repeat 0 0;
+    background-size: contain;
+}
+
+.title {
+    background: url("../images/top.png") no-repeat 0 0;
+    background-size: contain;
+    width: 82.9%;
+    height: 15%;
+    margin-top: 9.3%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.description {
+    margin-top: 8.3%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.info {
+    margin-top: 3.64%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.btn {
+    margin-top: 3.64%;
 }

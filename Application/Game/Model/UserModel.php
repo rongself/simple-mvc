@@ -34,11 +34,18 @@ class UserModel extends \Core\Model\AbstractModel {
 
     public function getHelpersByUserId($userId)
     {
-        return $this->db->query('select * from dsf_help where user_id = :userId',array('userId' => $userId));
+        $result = $this->db->query('select * from dsf_help where user_id = :userId',array('userId' => $userId));
+        return empty($result) ? $result : current($result);
     }
 
     public function deleteAll()
     {
         $this->db->exec('delete from dsf_user');
+    }
+
+    public function getUserById($userId)
+    {
+        $result = $this->db->query('select * from dsf_user where id = :userId',array('userId' => $userId));
+        return empty($result) ? $result : current($result);
     }
 }
