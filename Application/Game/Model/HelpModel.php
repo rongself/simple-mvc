@@ -49,9 +49,10 @@ class HelpModel extends AbstractModel{
         return empty($result) ? null:current($result)['count'];
     }
 
-    public function getLastHelpTime($helperId,$userId)
+    public function getLastHelpTime($ip,$userId)
     {
-        $result = $this->db->query('select create_time as createTime from dsf_help where helper_id = :helperId and user_id = :userId order by id desc limit 1 ',array('helperId' => $helperId,'userId' => $userId));
+
+        $result = $this->db->query('select create_time as createTime from dsf_help where ip = :ip and user_id = :userId order by id desc limit 1 ',array('ip' => $ip,'userId' => $userId));
         return empty($result) ? null:current($result)['createTime'];
     }
 }

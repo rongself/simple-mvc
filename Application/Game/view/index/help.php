@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" type="text/css" href="public/styles/default.css"/>
+    <link rel="stylesheet" type="text/css" href="public/styles/default.css"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>帮帮牛郎</title>
@@ -9,6 +11,7 @@
         head.load(
             'http://res.wx.qq.com/open/js/jweixin-1.0.0.js',
             'bower_components/zepto/zepto.min.js',
+            'bower_components/json2/json2.js',
             'bower_components/zeptotouch/zepto-touch.min.js'
         );
     </script>
@@ -23,28 +26,24 @@
         <div class="btn" style="text-align: center"><img src="images/to_help.png" alt="" width="78%"/></div>
     <?php else: ?>
         <div class="title"><img src="images/top.png" alt="" width="82.9%;"/></div>
-        <div class="description">牛郎的礼物离织女<span style="color: #ffffff">100</span>光年</div>
+        <div class="description" style="display: none;">在你的帮助下 <br/><br/>
+            <?php echo $this->user['nickname'];?>帮牛郎送的礼物离织女又近了<span style="color: #ffffff">10</span>光年</div>
         <div class="rainbow" style="position: relative">
             <img src="images/ch_05.png" width="88.6%;" alt=""/>
             <img src="images/present.png" width="16.6%;" alt="" style="position: absolute;left: 3rem;bottom: 1rem;"/>
             <img src="images/girl-angry.png" width="22.5%;" alt="" style="position: absolute;right: 2rem;bottom: 1rem;"/>
         </div>
-        <div class="info"><?php echo $this->user['nickname'];?>接受了任务，表示一定准时完成</div>
-        <div class="btn" style="text-align: center"><img id="shareBtn" src="images/btn1.png" alt="" width="78%"/></div>
-        <div class="info">已有<?php echo $this->helpedTimes;?>人帮助，距离完成还有<?php echo $this->leftDistance;?>光年</div>
-        <div style="text-align: left;width: 78%;margin-left: auto;margin-right: auto;margin-top: 9%">
-            <div style="font-size: xx-small;font-weight: bold;line-height: 1.2em">
-                <p>游戏规则：</p>
-                <p>1.游戏发起人邀请好友帮助牛郎传递礼物，当礼物到达织女
-                    即为游戏成功；</p>
-                <p>2.每个好友可以帮助游戏发起人一次；</p>
-                <p>3.游戏成功后游戏发起人可以获得skype国际通话软件60分
-                    钟国际长途兑换码。</p>
+        <div class="info">已有<span class="num"><?php echo $this->helpedTimes;?></span>人帮助，距离完成还有<span class="left-distance" style="color: #ffffff"><?php echo $this->leftDistance;?></span>光年</div>
+        <div class="btn" id="helpBtn" style="text-align: center;position: relative;">
+            <div style="position: absolute;left: 0px;top: 0px;width: 100%;height:100%;text-align: center;line-height: 3.3rem;color: white;font-size: 1.7rem;">
+                点击帮<?php echo $this->user['nickname'];?>把牛郎的礼物送给织女
             </div>
+            <img id="shareBtn" src="images/btn_base.png" alt="" width="78%"/>
         </div>
+        <div class="btn" style="text-align: center"><img id="joinBtn" src="images/to_help.png" alt="" width="78%"/></div>
     <?php endif; ?>
 
-    <div style="text-align: center;margin-top: 6%;color: #ffffff;   ">本活动物流赞助商：宇宙领先的递四方速递有限公司</div>
+    <div class="footer">本活动物流赞助商：宇宙领先的递四方速递有限公司</div>
 </div>
 <div class="layer-1" style="display: none;">
     <div class="row-1" style="text-align: center;margin-top: 6.25%">
@@ -58,11 +57,32 @@
     </div>
 </div>
 <div class="layer-2" style="text-align: center;display: none;">
-    <img src="images/p1_05.png" width="72.2%" alt="" style="margin-top: 9.2%;"/>
+    <div class="tip-box" style="position: relative">
+        <h2 style="font-size: 3.2rem;padding-top: 1rem;">仅需2步</h2>
+        <div style="font-size: 2.2rem;text-align: left;padding: 2rem;line-height: 2.5rem;">
+        <p>1.关注递四方官方服务号
+            （微信号：disifang）</p>
+        <p>2.点击左下角【帮帮牛郎】
+            进入游戏</p>
+        <p>3.转发至朋友圈或微信群
+            邀请好友一起帮忙</p>
+        </div>
+        <div style="text-align: center;width: 100%;position: absolute;bottom: -3rem;">
+            <img class="close" src="images/close.png" alt=""/>
+        </div>
+    </div>
 </div>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
 <?php $apiList = array('onMenuShareQQ', 'onMenuShareWeibo','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQZone');?>
 <script type="text/javascript" charset="utf-8">
+
+    var step = [
+        [[3,2],[4,3]],
+        [[7,4],[6,4.2]],
+        [[9,5],[8,5.2]],
+        [[11,5],[9,5.5]],
+        [[12,5],[4,3]]
+    ]
     var title = '帮帮牛郎';
     var imgUrl = 'http://examples.ronccc.com/wechatsdk/public/images/icon.png';
     var link = 'http://examples.ronccc.com/wechatsdk/public/index.php?module=game&controller=index&action=help&uid=<?php echo $this->user['id'];?>';
@@ -123,16 +143,34 @@
         });
     });
     head.ready(function(){
-        $('#closeBtn').on('tap',function(){
-            $('.layer-1').remove();
+        $('.close').on('tap',function(){
+            $('.layer-2').hide();
         });
-
-        $('#shareBtn').on('tap',function(){
+        $('#joinBtn').on('tap',function(){
             $('.layer-2').show();
         });
-
-        $('.layer-2').on('tap',function(){
-            $(this).hide();
+        var disabled = false;
+        $('#helpBtn').on('tap',function(){
+            if (!disabled) {
+                var url = 'http://examples.ronccc.com/wechatsdk/public/index.php?module=game&controller=index&action=addHelp';
+                $.post(url,<?php echo json_encode(array('uid'=>$this->user['id']))?>,function(ret){
+                    ret = JSON.parse(ret);
+                    if(ret.success) {
+                        if(ret.leftDistance > 0) {
+                            var num = parseInt($('info').children('span.num').text());
+                            $('.description').children('span').text(ret.distance);
+                            $('.description').show();
+                            $('info').children('span.num').text(num+1);
+                            $('info').children('span.left-distance').text(ret.leftDistance);
+                        }else{
+                            location.href = 'http://examples.ronccc.com/wechatsdk/public/index.php?module=game&&uid=<?php echo $this->user['id'];?>';
+                        }
+                    }else{
+                        alert(ret.message);
+                    }
+                    disabled = true;
+                });
+            }
         });
     });
 </script>

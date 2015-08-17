@@ -1,11 +1,18 @@
+html{
+    font-size: 62.5%;
+}
 body,html {
     width: 100%;
     height: 100%;
 }
 body{
-    background: url("../images/bg.jpg") no-repeat;
     background-size: cover;
     font-family: Raleway, "微软雅黑", Arial, Helvetica, sans-serif;
+    font-size: 1.4rem;
+}
+
+.bg{
+    background: url("../images/bg.jpg") no-repeat;
 }
 .touchBtn {
     display: block;
@@ -13,7 +20,7 @@ body{
     width: 250px;
     background-color: crimson;
     border-radius: 250px;
-    font-size: 2rem;
+    font-size: 1.4rem;
     font-family: fantasy;
     color: #fff;
     line-height: 250px;
@@ -61,20 +68,18 @@ body{
 }
 
 .rainbow {
-    width: 88.6%;
-    height: 14.4%;
+    text-align: center;
     margin-top: 14.7%;
     margin-left: auto;
     margin-right: auto;
-    background: url("../images/ch_05.png") no-repeat 0 0;
-    background-size: contain;
+    /*background: url("../images/ch_05.png") no-repeat 0 0;*/
+    /*background-size: contain;*/
 }
 
 .title {
-    background: url("../images/top.png") no-repeat 0 0;
-    background-size: contain;
-    width: 82.9%;
-    height: 15%;
+    /*background: url("../images/top.png") no-repeat 0 0;*/
+    /*background-size: contain;*/
+    text-align: center;
     margin-top: 9.3%;
     margin-left: auto;
     margin-right: auto;
@@ -94,4 +99,33 @@ body{
 
 .btn {
     margin-top: 3.64%;
+}
+
+.footer {
+    position: absolute;
+    bottom: 1rem;
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+}
+
+.tip-box {
+    height: 49.4%;
+    width: 83.3%;
+    border-radius: 1rem;
+    background-color: #e48243;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20%;
+}
+
+.close{
+    width: 22.4%;
+}
+
+.use {
+    background: url("../images/use.jpg") no-repeat;
+    background-size: contain;
+    width: 100%;
+    height: 100%;
 }

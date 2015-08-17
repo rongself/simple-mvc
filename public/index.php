@@ -17,8 +17,7 @@ spl_autoload_register(function($className){
 	include str_replace('\\',DIRECTORY_SEPARATOR,$className).'.php';
 });
 
-//\Util\MemoryTrack::start();
-//\Util\RunningTimeTrack::start();
+require __DIR__ . '/../vendor/autoload.php';
 
 $config = new \Core\Config(PROJECT_ROOT.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'application.config.php');
 $app = new \Core\Application($config);

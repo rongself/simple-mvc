@@ -14,6 +14,7 @@ abstract class AbstractController {
     protected $controllerName;
     protected $actionName;
     protected $params;
+    protected $config;
     /**
      * @var \Core\DB\AbstractDbAdapter
      */
@@ -113,6 +114,22 @@ abstract class AbstractController {
     public function setDbAdapter(DB\AbstractDbAdapter $dbAdapter)
     {
         $this->dbAdapter = $dbAdapter;
+    }
+
+    /**
+     * @param Config $config
+     */
+    public function setConfig(Config $config)
+    {
+        $this->config = $config;
+    }
+
+    /**
+     * @return Config
+     */
+    public function getConfig()
+    {
+        return $this->config;
     }
 
     protected function json(array $data = array())

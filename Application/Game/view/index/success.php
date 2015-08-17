@@ -17,45 +17,17 @@
 </head>
 <body class="bg">
 <div class="main">
-    <?php if ($this->isSuccess) :?>
-        <div class="title"><img src="images/success.png" alt="" width="88.1%;"/></div>
-        <div class="info"><?php echo $this->user['nickname'];?>已成功帮助牛郎，获得skype国际通话卡</div>
-        <div class="btn" style="text-align: center"><img src="images/to_help.png" alt="" width="78%"/></div>
-    <?php else: ?>
-        <div class="title"><img src="images/top.png" alt="" width="82.9%;"/></div>
-        <div class="description">牛郎的礼物离织女<span style="color: #ffffff">100</span>光年</div>
-        <div class="rainbow" style="position: relative">
-            <img src="images/ch_05.png" width="88.6%;" alt=""/>
-            <img src="images/present.png" width="16.6%;" alt="" style="position: absolute;left: 3rem;bottom: 1rem;"/>
-            <img src="images/girl-angry.png" width="22.5%;" alt="" style="position: absolute;right: 2rem;bottom: 1rem;"/>
-        </div>
-        <div class="info"><?php echo $this->user['nickname'];?>接受了任务，表示一定准时完成</div>
-        <div class="btn" style="text-align: center"><img id="shareBtn" src="images/btn1.png" alt="" width="78%"/></div>
-        <div class="info">已有<?php echo $this->helpedTimes;?>人帮助，距离完成还有<?php echo $this->leftDistance;?>光年</div>
-        <div style="text-align: left;width: 78%;margin-left: auto;margin-right: auto;margin-top: 9%">
-            <div style="font-size: xx-small;font-weight: bold;line-height: 1.2em">
-                <p>游戏规则：</p>
-                <p>1.游戏发起人邀请好友帮助牛郎传递礼物，当礼物到达织女
-                    即为游戏成功；</p>
-                <p>2.每个好友可以帮助游戏发起人一次；</p>
-                <p>3.游戏成功后游戏发起人可以获得skype国际通话软件60分
-                    钟国际长途兑换码。</p>
-            </div>
-        </div>
-    <?php endif; ?>
-
+    <div class="title"><img src="images/success.png" alt="" width="88.1%;"/></div>
+    <?php if($this->cardNumber):?>
+        <div class="info">skype兑换码：<?php echo $this->cardNumber['id'];?></div>
+    <?php else:?>
+        <div class="info">慢了一步，skype国际通话卡已经送完</div>
+    <?php endif;?>
+    <div style="text-align: center;margin-top: 2rem;">
+        <a href="http://examples.ronccc.com/wechatsdk/public/index.php?module=game&controller=index&action=use">如何使用</a>
+    </div>
+    <div class="btn" style="text-align: center"><img id="shareBtn" src="images/success_share_btn.png" alt="" width="78%"/></div>
     <div style="text-align: center;margin-top: 6%;color: #ffffff;   ">本活动物流赞助商：宇宙领先的递四方速递有限公司</div>
-</div>
-<div class="layer-1" style="display: none;">
-    <div class="row-1" style="text-align: center;margin-top: 6.25%">
-        <img src="images/f_09.png" width="82%" alt=""/>
-    </div>
-    <div class="row-2" style="text-align: center;margin-top: 4.7%;">
-        <img src="images/f_21.png" width="59%" alt=""/>
-    </div>
-    <div class="row-3" style="text-align: center;margin-top: 3.7%">
-        <a href="javascript:void(0);" id="closeBtn"><img src="images/f_34.png" width="78%" alt=""/></a>
-    </div>
 </div>
 <div class="layer-2" style="text-align: center;display: none;">
     <img src="images/p1_05.png" width="72.2%" alt="" style="margin-top: 9.2%;"/>
@@ -65,7 +37,7 @@
 <script type="text/javascript" charset="utf-8">
     var title = '帮帮牛郎';
     var imgUrl = 'http://examples.ronccc.com/wechatsdk/public/images/icon.png';
-    var link = 'http://examples.ronccc.com/wechatsdk/public/index.php?module=game&controller=index&action=help&uid=<?php echo $this->user['id'];?>';
+    var link = 'http://examples.ronccc.com/wechatsdk/public/index.php?module=game&uid=<?php echo $this->user['id'];?>';
     var desc = 'XXX';
 
     wx.config(<?php echo $this->js->config($apiList, true, true) ?>);
@@ -123,10 +95,6 @@
         });
     });
     head.ready(function(){
-        $('#closeBtn').on('tap',function(){
-            $('.layer-1').remove();
-        });
-
         $('#shareBtn').on('tap',function(){
             $('.layer-2').show();
         });

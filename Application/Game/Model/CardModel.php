@@ -13,14 +13,28 @@ use Core\Model\AbstractModel;
 
 class CardModel extends AbstractModel {
 
-    public function create($data)
+    public function create($id)
     {
-        $sql = "INSERT INTO dsf_user (id,card_number) VALUES (:id,:card_number,)";
+        $sql = "INSERT INTO dsf_card_to_user (id) VALUES (:id)";
         $pre = $this->db->getDb()->prepare($sql);
-        $pre->bindValue(':card_number',$data['card_number'],SQLITE3_TEXT);
-        $pre->bindValue(':id',$data['id'],SQLITE3_TEXT);
+        $pre->bindValue(':id',$id,SQLITE3_TEXT);
 
         $pre->execute();
         return $this->db->getDb()->lastInsertRowID();
+    }
+
+    public function getACard($userId)
+    {
+        $result = $this->db->query('select * from dsf_card_to_user where user_id = :userId limit 1',array('userId'=>$userId));
+        if($result){
+            return empty($result) ? $result : current($result);
+        }else {
+            $result = $this->db->query('select * from dsf_card_to_user where user_id is null limit 1');
+            $result  = empty($result) ? $result : current($result);
+            if($result){
+                $this->db->query('update dsf_card_to_user set user_id = :userId where id = :id',array('id'=>$result['id'],'userId'=>$userId));
+            }
+            return $result;
+        }
     }
 }
