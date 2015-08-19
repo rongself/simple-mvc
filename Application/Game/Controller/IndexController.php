@@ -71,7 +71,8 @@ class IndexController extends AbstractController
         $menu = new Menu($appId, $secret);
 
         $menus = array(
-            new MenuItem("帮帮牛郎", 'click', 'HELP_NIU_LANG')
+            new MenuItem("帮帮牛郎", 'click', 'HELP_NIU_LANG'),
+            new MenuItem("领取skype通话卡", 'click', 'GET_GIFT')
         );
 
         try {
@@ -140,15 +141,14 @@ class IndexController extends AbstractController
         $this->view->js = $js;
         $user = $userModel->getUserByOpenId($openId);
         if(!$user){
-            return;
+            return $this->view->message = '你还没有参加此活动';
         }
 
         $leftDistance = $helpModel->getLeftDistance($user['id']);
 
-        if ($leftDistance >0 ) {
-            return;
+        if ($leftDistance > 0 ) {
+            return $this->view->message = '你还没有帮牛郎送达礼物呢';
         }
-
         $cardNumber = $model->getACard(intval($user['id']));
         $this->view->cardNumber = $cardNumber;
     }
@@ -162,11 +162,11 @@ class IndexController extends AbstractController
         $server = new Server($appId, $token);
 
         $server->on('event', 'subscribe', function($event){
-            return Message::make('text')->content('您好！欢迎关注 overtrue');
+            return Message::make('text')->content('您好！欢迎关注 递四方速递');
         });
 
         $server->on('event', 'click', function($message) use ($appId, $secret){
-            if($message->EventKey = 'HELP_NIU_LANG') {
+            if($message->EventKey == 'HELP_NIU_LANG') {
                 $openId = $message->FromUserName;
                 $model = new UserModel($this->getDbAdapter());
                 $user = $model->getUserByOpenId($openId);
@@ -183,19 +183,33 @@ class IndexController extends AbstractController
                 $leftDistance = $helpModel->getLeftDistance($userId);
 
                 if ( $leftDistance > 0 ) {
-                    $url = 'http://examples.ronccc.com/wechatsdk/public/index.php?module=game&uid='.$userId;
+                    $url = 'http://4px.ronccc.com/?module=game&uid='.$userId;
                 } else {
-                    $url = 'http://examples.ronccc.com/wechatsdk/public/index.php?module=game&controller=index&action=success&openId='.$openId;
+                    $url = 'http://4px.ronccc.com/?module=game&controller=index&action=success&openId='.$openId;
                 }
                 return Message::make('news')->items(function() use ($url){
                     return array(
                         Message::make('news_item')
-                            ->title('帮帮牛郎')
+                            ->title('帮帮牛郎-点击进入游戏')
                             ->url($url)
-                            ->picUrl('http://examples.ronccc.com/wechatsdk/public/images/icon.png'),
+                            ->picUrl('http://4px.ronccc.com/images/msg-pic.jpg'),
                     );
                 });
             }
+
+            if($message->EventKey == 'GET_GIFT') {
+                $openId = $message->FromUserName;
+                $url = 'http://4px.ronccc.com/?module=game&controller=index&action=success&openId='.$openId;
+                return Message::make('news')->items(function() use ($url){
+                    return array(
+                        Message::make('news_item')
+                            ->title('领取skype通话卡')
+                            ->url($url)
+                            ->picUrl('http://4px.ronccc.com/images/msg-pic.jpg'),
+                    );
+                });
+            }
+
         });
 
         // 监听所有类型
@@ -218,16 +232,16 @@ class IndexController extends AbstractController
                 $leftDistance = $helpModel->getLeftDistance($userId);
 
                 if ( $leftDistance > 0 ) {
-                    $url = 'http://examples.ronccc.com/wechatsdk/public/index.php?module=game&uid='.$userId;
+                    $url = 'http://4px.ronccc.com/?module=game&uid='.$userId;
                 } else {
-                    $url = 'http://examples.ronccc.com/wechatsdk/public/index.php?module=game&controller=index&action=success&openid='.$openId;
+                    $url = 'http://4px.ronccc.com/?module=game&controller=index&action=success&openid='.$openId;
                 }
                 return Message::make('news')->items(function() use ($url){
                     return array(
                         Message::make('news_item')
                             ->title('帮帮牛郎')
                             ->url($url)
-                            ->picUrl('http://examples.ronccc.com/wechatsdk/public/images/icon.png'),
+                            ->picUrl('http://4px.ronccc.com/images/msg-pic.jpg'),
                     );
                 });
             }

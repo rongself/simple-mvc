@@ -18,15 +18,14 @@
 </head>
 <body>
     <div class="use">
-        <div style="position: absolute;bottom: 6rem; color: #ffffff;line-height: 1.5rem;width: 100%;padding: 2rem;box-sizing:border-box;">
-            <div style="text-align: left">
-                <p>1.登录网址
-                    http://secure.skype.com/portal/voucher/redeem(长按复制)</p>
+        <div style="position: absolute;bottom: 0rem; color: #ffffff;line-height: 1.5rem;width: 100%;padding: 2rem;box-sizing:border-box;">
+            <div style="text-align: left;word-break: break-all;font-size: 1.4rem;">
+                <p>1.登录网址 <code>http://secure.skype.com/portal/voucher/redeem</code> (长按复制)</p>
                 <p>2.登录您的Skype账号</p>
                 <p>3.输入你的兑换码</p>
                 <p>4.完成兑换！</p>
             </div>
-            <div style="text-align: right">有限期至2015年10月31日</div>
+            <div style="text-align: right;font-size: 1.6rem;">有限期至2015年10月31日</div>
         </div>
     </div>
 </body>

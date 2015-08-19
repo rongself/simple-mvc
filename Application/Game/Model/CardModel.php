@@ -26,8 +26,9 @@ class CardModel extends AbstractModel {
     public function getACard($userId)
     {
         $result = $this->db->query('select * from dsf_card_to_user where user_id = :userId limit 1',array('userId'=>$userId));
+        $result  = empty($result) ? $result : current($result);
         if($result){
-            return empty($result) ? $result : current($result);
+            return $result;
         }else {
             $result = $this->db->query('select * from dsf_card_to_user where user_id is null limit 1');
             $result  = empty($result) ? $result : current($result);

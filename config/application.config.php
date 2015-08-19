@@ -3,7 +3,7 @@ return array(
     'applicationNamespace' => 'Application',
     'viewDir' => '/view',
     'routerOptions'  => array(
-        'defaultModule' => 'index',
+        'defaultModule' => 'game',
         'defaultController' => 'index',
         'defaultAction' => 'index',
     ),

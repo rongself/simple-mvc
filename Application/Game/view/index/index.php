@@ -46,7 +46,7 @@
 
     <div style="text-align: center;margin-top: 6%;color: #ffffff;   ">本活动物流赞助商：宇宙领先的递四方速递有限公司</div>
 </div>
-<div class="layer-1" style="display: none;">
+<div class="layer-1">
     <div class="row-1" style="text-align: center;margin-top: 6.25%">
         <img src="images/f_09.png" width="82%" alt=""/>
     </div>
@@ -60,69 +60,68 @@
 <div class="layer-2" style="text-align: center;display: none;">
     <img src="images/p1_05.png" width="72.2%" alt="" style="margin-top: 9.2%;"/>
 </div>
-<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
 <?php $apiList = array('onMenuShareQQ', 'onMenuShareWeibo','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQZone');?>
 <script type="text/javascript" charset="utf-8">
-    var title = '帮帮牛郎';
-    var imgUrl = 'http://examples.ronccc.com/wechatsdk/public/images/icon.png';
-    var link = 'http://examples.ronccc.com/wechatsdk/public/index.php?module=game&controller=index&action=help&uid=<?php echo $this->user['id'];?>';
-    var desc = 'XXX';
-
-    wx.config(<?php echo $this->js->config($apiList, true, true) ?>);
-    wx.ready(function(){
-        wx.checkJsApi({
-            jsApiList: <?php echo json_encode($apiList);?>, // 需要检测的JS接口列表，所有JS接口列表见附录2,
-            success: function(res) {
-                // 以键值对的形式返回，可用的api值true，不可用为false
-                // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
-                if (res.checkResult.onMenuShareQQ){
-                    wx.onMenuShareQQ({
-                        title: title, // 分享标题
-                        desc: desc, // 分享描述
-                        link: link, // 分享链接
-                        imgUrl: imgUrl
-                    });
-                }
-                if (res.checkResult.onMenuShareTimeline){
-                    wx.onMenuShareTimeline({
-                        title: title, // 分享标题
-                        link: link, // 分享链接
-                        imgUrl: imgUrl // 分享图标
-                    });
-                }
-
-                if (res.checkResult.onMenuShareAppMessage){
-                    wx.onMenuShareAppMessage({
-                        title: title, // 分享标题
-                        desc: desc, // 分享描述
-                        link: link, // 分享链接
-                        imgUrl: imgUrl, // 分享图标
-                        type: 'link', // 分享类型,music、video或link，不填默认为link
-                        dataUrl: '' // 如果type是music或video，则要提供数据链接，默认为空
-                    });
-                }
-
-                if (res.checkResult.onMenuShareWeibo){
-                    wx.onMenuShareWeibo({
-                        title: title, // 分享标题
-                        desc: desc, // 分享描述
-                        link: link, // 分享链接
-                        imgUrl: imgUrl // 分享图标
-                    });
-                }
-
-                if (res.checkResult.onMenuShareQZone){
-                    wx.onMenuShareQZone({
-                        title: title, // 分享标题
-                        desc: desc, // 分享描述
-                        link: link, // 分享链接
-                        imgUrl: imgUrl // 分享图标
-                    });
-                }
-            }
-        });
-    });
     head.ready(function(){
+        var title = '帮帮牛郎';
+        var imgUrl = 'http://4px.ronccc.com/images/icon.png';
+        var link = 'http://4px.ronccc.com/?module=game&controller=index&action=help&uid=<?php echo $this->user['id'];?>';
+        var desc = '小手一抖，skype国际通话卡到手。<?php echo $this->user['nickname'];?>帮牛郎送的礼物只剩<?php echo $this->leftDistance;?>光年，快来帮忙！';
+
+        wx.config(<?php echo $this->js->config($apiList, true, true) ?>);
+        wx.ready(function(){
+            wx.checkJsApi({
+                jsApiList: <?php echo json_encode($apiList);?>, // 需要检测的JS接口列表，所有JS接口列表见附录2,
+                success: function(res) {
+                    // 以键值对的形式返回，可用的api值true，不可用为false
+                    // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+                    if (res.checkResult.onMenuShareQQ){
+                        wx.onMenuShareQQ({
+                            title: title, // 分享标题
+                            desc: desc, // 分享描述
+                            link: link, // 分享链接
+                            imgUrl: imgUrl
+                        });
+                    }
+                    if (res.checkResult.onMenuShareTimeline){
+                        wx.onMenuShareTimeline({
+                            title: title, // 分享标题
+                            link: link, // 分享链接
+                            imgUrl: imgUrl // 分享图标
+                        });
+                    }
+
+                    if (res.checkResult.onMenuShareAppMessage){
+                        wx.onMenuShareAppMessage({
+                            title: title, // 分享标题
+                            desc: desc, // 分享描述
+                            link: link, // 分享链接
+                            imgUrl: imgUrl, // 分享图标
+                            type: 'link', // 分享类型,music、video或link，不填默认为link
+                            dataUrl: '' // 如果type是music或video，则要提供数据链接，默认为空
+                        });
+                    }
+
+                    if (res.checkResult.onMenuShareWeibo){
+                        wx.onMenuShareWeibo({
+                            title: title, // 分享标题
+                            desc: desc, // 分享描述
+                            link: link, // 分享链接
+                            imgUrl: imgUrl // 分享图标
+                        });
+                    }
+
+                    if (res.checkResult.onMenuShareQZone){
+                        wx.onMenuShareQZone({
+                            title: title, // 分享标题
+                            desc: desc, // 分享描述
+                            link: link, // 分享链接
+                            imgUrl: imgUrl // 分享图标
+                        });
+                    }
+                }
+            });
+        });
         $('#closeBtn').on('tap',function(){
             $('.layer-1').remove();
         });
