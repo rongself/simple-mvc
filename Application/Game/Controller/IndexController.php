@@ -24,15 +24,18 @@ class IndexController extends AbstractController
         $model = new UserModel($this->getDbAdapter());
         $helpModel = new HelpModel($this->getDbAdapter());
 
-        $ip = $model->getUserIP();
-
-        $lastHelpTime = $helpModel->getLastHelpTime($ip,$getId);
         $leftDistance = $helpModel->getLeftDistance($getId);
+
+        $user = $model->getUserById($getId);
+
+        if ($user && !$user['inited']) {
+            $model->setInit($user['id'],true);
+        }
 
         $this->view->leftDistance = $leftDistance;
         $this->view->helpedTimes = $helpModel->getHelpTimes($getId);
         $this->view->isSuccess = $leftDistance <= 0;
-        $this->view->user = $model->getUserById($getId);
+        $this->view->user = $user;
         $this->view->js = $js;
 
     }
@@ -141,13 +144,16 @@ class IndexController extends AbstractController
         $this->view->js = $js;
         $user = $userModel->getUserByOpenId($openId);
         if(!$user){
-            return $this->view->message = '你还没有参加此活动';
+            return $this->view->message = '你还没有参加此活动,关注微信号:disifang,进入服务号后台回复关键字“帮帮牛郎”';
         }
 
         $leftDistance = $helpModel->getLeftDistance($user['id']);
 
         if ($leftDistance > 0 ) {
-            return $this->view->message = '你还没有帮牛郎送达礼物呢';
+            $this->view->user = $user;
+            $leftDistance = $helpModel->getLeftDistance($user['id']);
+            $this->view->leftDistance = $leftDistance;
+            return $this->view->message = '你还没有帮牛郎送达礼物呢,分享本页参与活动';
         }
         $cardNumber = $model->getACard(intval($user['id']));
         $this->view->cardNumber = $cardNumber;
@@ -159,7 +165,7 @@ class IndexController extends AbstractController
         $wechatConfig = $this->getConfig()->getConfig('wechat');
         list($appId,$token,$secret,$encodingAESKey) = array_values($wechatConfig);
 
-        $server = new Server($appId, $token);
+        $server = new Server($appId, $token,$encodingAESKey);
 
         $server->on('event', 'subscribe', function($event){
             return Message::make('text')->content('您好！欢迎关注 递四方速递');
@@ -199,6 +205,15 @@ class IndexController extends AbstractController
 
             if($message->EventKey == 'GET_GIFT') {
                 $openId = $message->FromUserName;
+                $model = new UserModel($this->getDbAdapter());
+                $user = $model->getUserByOpenId($openId);
+                $ip = $model->getUserIP();
+                if (!$user) {
+                    $userService = new User($appId, $secret);
+                    $userInfo = $userService->get($openId);
+                    $model->createUser($openId,$openId,$ip,$userInfo->nickname);
+                }
+
                 $url = 'http://4px.ronccc.com/?module=game&controller=index&action=success&openId='.$openId;
                 return Message::make('news')->items(function() use ($url){
                     return array(
@@ -215,7 +230,7 @@ class IndexController extends AbstractController
         // 监听所有类型
         $server->on('message', function($message) use ($appId, $secret) {
 
-            if ($message->Content == '我要帮牛郎') {
+            if ($message->Content == '帮帮牛郎') {
                 $openId = $message->FromUserName;
                 $model = new UserModel($this->getDbAdapter());
                 $user = $model->getUserByOpenId($openId);
@@ -234,12 +249,12 @@ class IndexController extends AbstractController
                 if ( $leftDistance > 0 ) {
                     $url = 'http://4px.ronccc.com/?module=game&uid='.$userId;
                 } else {
-                    $url = 'http://4px.ronccc.com/?module=game&controller=index&action=success&openid='.$openId;
+                    $url = 'http://4px.ronccc.com/?module=game&controller=index&action=success&openId='.$openId;
                 }
                 return Message::make('news')->items(function() use ($url){
                     return array(
                         Message::make('news_item')
-                            ->title('帮帮牛郎')
+                            ->title('帮帮牛郎-点击进入游戏')
                             ->url($url)
                             ->picUrl('http://4px.ronccc.com/images/msg-pic.jpg'),
                     );

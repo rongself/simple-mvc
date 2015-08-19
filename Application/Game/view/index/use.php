@@ -4,11 +4,13 @@
     <link rel="stylesheet" type="text/css" href="public/styles/default.css"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <title>帮帮牛郎</title>
     <script type="text/javascript" src="bower_components/headjs/dist/1.0.0/head.min.js"></script>
     <script type="text/javascript" >
         head.load(
-            'http://res.wx.qq.com/open/js/jweixin-1.0.0.js',
             'bower_components/zepto/zepto.min.js',
             'bower_components/zeptotouch/zepto-touch.min.js'
         );

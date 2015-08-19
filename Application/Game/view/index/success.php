@@ -22,7 +22,8 @@
         <div class="info"><?php echo $this->message;?></div>
     <?php else:?>
         <?php if($this->cardNumber):?>
-            <div class="info">skype兑换码：<?php echo $this->cardNumber['id'];?></div>
+            <div class="info">skype兑换码：</div>
+            <div class="info"><?php echo $this->cardNumber['id'];?></div>
         <?php else:?>
             <div class="info">慢了一步，skype国际通话卡已经送完</div>
         <?php endif;?>
@@ -31,7 +32,7 @@
         <a href="http://4px.ronccc.com/?module=game&controller=index&action=use">如何使用</a>
     </div>
     <div class="btn" style="text-align: center"><img id="shareBtn" src="images/success_share_btn.png" alt="" width="78%"/></div>
-    <div style="text-align: center;margin-top: 6%;color: #ffffff;   ">本活动物流赞助商：宇宙领先的递四方速递有限公司</div>
+    <div style="text-align: center;margin-top: 6%;font-size: 1.0rem;color: #DADADA;">本活动最终解释权归递四方速递所有</div>
 </div>
 <div class="layer-2" style="text-align: center;display: none;">
     <img src="images/p1_05.png" width="72.2%" alt="" style="margin-top: 9.2%;"/>
@@ -39,12 +40,12 @@
 <?php $apiList = array('onMenuShareQQ', 'onMenuShareWeibo','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQZone');?>
 <script type="text/javascript" charset="utf-8">
     head.ready(function(){
-        var title = '帮帮牛郎';
+        var title = '小手一抖，skype国际通话卡到手。<?php echo $this->user['nickname'];?>帮牛郎送的礼物只剩<?php echo $this->leftDistance;?>光年，快来帮忙！';
         var imgUrl = 'http://4px.ronccc.com/images/icon.png';
-        var link = 'http://4px.ronccc.com/?module=game&uid=<?php echo $this->user['id'];?>';
-        var desc = 'XXX';
+        var link = 'http://4px.ronccc.com/?module=game&controller=index&action=help&uid=<?php echo $this->user['id'];?>';
+        var desc = '小手一抖，skype国际通话卡到手。<?php echo $this->user['nickname'];?>帮牛郎送的礼物只剩<?php echo $this->leftDistance;?>光年，快来帮忙！';
 
-        wx.config(<?php echo $this->js->config($apiList, true, true) ?>);
+        wx.config(<?php echo $this->js->config($apiList, false, true) ?>);
         wx.ready(function(){
             wx.checkJsApi({
                 jsApiList: <?php echo json_encode($apiList);?>, // 需要检测的JS接口列表，所有JS接口列表见附录2,

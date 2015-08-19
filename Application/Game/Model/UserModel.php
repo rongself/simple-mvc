@@ -79,4 +79,9 @@ class UserModel extends \Core\Model\AbstractModel {
         return $ip;
     }
 
+    public function setInit($userId,$status)
+    {
+        return $this->db->query('update dsf_user set inited = :inited where id = :id',array('inited'=>intval($status),'id'=>$userId));
+    }
+
 }

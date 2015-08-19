@@ -1,7 +1,7 @@
 <?php
 session_start();
 error_reporting(E_ALL);
-ini_set('display_errors','on');
+ini_set('display_errors','off');
 defined('APPLICATION_ROOT')||define('PROJECT_ROOT',realpath(__DIR__.'/..'));
 defined('LIBRARY_PATH')||define('LIBRARY_PATH',PROJECT_ROOT.'/library');
 defined('DS')||define('DS',DIRECTORY_SEPARATOR);

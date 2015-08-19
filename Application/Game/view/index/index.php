@@ -20,7 +20,8 @@
     <?php if ($this->isSuccess) :?>
         <div class="title"><img src="images/success.png" alt="" width="88.1%;"/></div>
         <div class="info"><?php echo $this->user['nickname'];?>已成功帮助牛郎，获得skype国际通话卡</div>
-        <div class="btn" style="text-align: center"><img src="images/to_help.png" alt="" width="78%"/></div>
+        <div class="info">(注:skype国际通话卡请进入服务号领取)</div>
+        <div class="btn" style="text-align: center"><img id="joinBtn" src="images/to_help.png" alt="" width="78%"/></div>
     <?php else: ?>
         <div class="title"><img src="images/top.png" alt="" width="82.9%;"/></div>
         <div class="description">牛郎的礼物离织女<span style="color: #ffffff"><?php echo Application\Game\Model\HelpModel::TOTAL_DISTANCE; ?></span>光年</div>
@@ -44,8 +45,9 @@
         </div>
     <?php endif; ?>
 
-    <div style="text-align: center;margin-top: 6%;color: #ffffff;   ">本活动物流赞助商：宇宙领先的递四方速递有限公司</div>
+    <div style="text-align: center;margin-top: 6%;font-size: 1.0rem;color: #DADADA;">本活动最终解释权归递四方速递所有</div>
 </div>
+<?php if(!$this->user['inited']):?>
 <div class="layer-1">
     <div class="row-1" style="text-align: center;margin-top: 6.25%">
         <img src="images/f_09.png" width="82%" alt=""/>
@@ -57,18 +59,34 @@
         <a href="javascript:void(0);" id="closeBtn"><img src="images/f_34.png" width="78%" alt=""/></a>
     </div>
 </div>
+<?php endif;?>
 <div class="layer-2" style="text-align: center;display: none;">
     <img src="images/p1_05.png" width="72.2%" alt="" style="margin-top: 9.2%;"/>
+</div>
+<div class="layer-3" style="text-align: center;display: none;">
+    <div class="tip-box" style="position: relative">
+        <h2 style="font-size: 3.2rem;padding-top: 1rem;">仅需2步</h2>
+        <div style="font-size: 2.2rem;text-align: left;padding: 2rem;line-height: 2.5rem;">
+            <p>1.关注递四方官方服务号
+                （微信号：disifang）</p>
+            <p>2.进入服务号后台回复关键字“帮帮牛郎”</p>
+            <p>3.转发至朋友圈或微信群
+                邀请好友一起帮忙</p>
+        </div>
+        <div style="text-align: center;width: 100%;position: absolute;bottom: -3rem;">
+            <img class="close" src="images/close.png" alt=""/>
+        </div>
+    </div>
 </div>
 <?php $apiList = array('onMenuShareQQ', 'onMenuShareWeibo','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQZone');?>
 <script type="text/javascript" charset="utf-8">
     head.ready(function(){
-        var title = '帮帮牛郎';
+        var title = '小手一抖，skype国际通话卡到手。<?php echo $this->user['nickname'];?>帮牛郎送的礼物只剩<?php echo $this->leftDistance;?>光年，快来帮忙！';
         var imgUrl = 'http://4px.ronccc.com/images/icon.png';
         var link = 'http://4px.ronccc.com/?module=game&controller=index&action=help&uid=<?php echo $this->user['id'];?>';
         var desc = '小手一抖，skype国际通话卡到手。<?php echo $this->user['nickname'];?>帮牛郎送的礼物只剩<?php echo $this->leftDistance;?>光年，快来帮忙！';
 
-        wx.config(<?php echo $this->js->config($apiList, true, true) ?>);
+        wx.config(<?php echo $this->js->config($apiList, false, true) ?>);
         wx.ready(function(){
             wx.checkJsApi({
                 jsApiList: <?php echo json_encode($apiList);?>, // 需要检测的JS接口列表，所有JS接口列表见附录2,
@@ -132,6 +150,13 @@
 
         $('.layer-2').on('tap',function(){
             $(this).hide();
+        });
+
+        $('.close').on('tap',function(){
+            $('.layer-3').hide();
+        });
+        $('#joinBtn,.join').on('tap',function(){
+            $('.layer-3').show();
         });
     });
 </script>

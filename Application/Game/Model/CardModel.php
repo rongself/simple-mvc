@@ -33,7 +33,7 @@ class CardModel extends AbstractModel {
             $result = $this->db->query('select * from dsf_card_to_user where user_id is null limit 1');
             $result  = empty($result) ? $result : current($result);
             if($result){
-                $this->db->query('update dsf_card_to_user set user_id = :userId where id = :id',array('id'=>$result['id'],'userId'=>$userId));
+                $this->db->query('update dsf_card_to_user set user_id = :userId,used_time = :usedTime where id = :id',array('id'=>$result['id'],'userId'=>$userId,'usedTime'=>date('Y-m-d H:i:s',time())));
             }
             return $result;
         }

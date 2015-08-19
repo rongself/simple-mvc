@@ -19,6 +19,8 @@ body{
     height: 250px;
     width: 250px;
     background-color: crimson;
+    -webkit-border-radius: 250px;
+    -moz-border-radius: 250px;
     border-radius: 250px;
     font-size: 1.4rem;
     font-family: fantasy;
@@ -49,6 +51,16 @@ body{
 }
 
 .layer-2 {
+    position:absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: rgba(0,0,0,0.8);
+}
+
+.layer-3 {
     position:absolute;
     top: 0px;
     left: 0px;
@@ -102,16 +114,19 @@ body{
 }
 
 .footer {
+    -webkit-text-size-adjust:none;
     position: absolute;
     bottom: 1rem;
     width: 100%;
     text-align: center;
-    color: #ffffff;
+    font-size: 1.0rem;
+    color: #DADADA;
 }
 
 .tip-box {
-    height: 49.4%;
     width: 83.3%;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
     border-radius: 1rem;
     background-color: #e48243;
     margin-left: auto;
@@ -125,6 +140,7 @@ body{
 
 .use {
     background: url("../images/use.jpg") no-repeat;
+    -webkit-background-size: cover;
     background-size: cover;
     width: 100%;
     height: 100%;

@@ -3,9 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
     <title>帮帮牛郎</title>
     <script type="text/javascript" src="bower_components/headjs/dist/1.0.0/head.min.js"></script>
     <script type="text/javascript" >
@@ -17,7 +14,7 @@
         );
     </script>
     <link rel="stylesheet" href="bower_components/reset-css/reset.css"/>
-    <link rel="stylesheet" href="styles/default.css"/>
+    <link rel="stylesheet" href="styles/default.css?v=1.0"/>
 </head>
 <body class="bg">
 <div class="main">
@@ -39,7 +36,7 @@
         <div class="btn" style="text-align: center;margin-top: 2rem"><img id="joinBtn" src="images/to_help.png" alt="" width="78%"/></div>
     <?php endif; ?>
 
-    <div class="footer">本活动物流赞助商：宇宙领先的递四方速递有限公司</div>
+    <div class="footer">本活动最终解释权归递四方速递所有</div>
 </div>
 <div class="layer-1" style="display: none;">
     <div class="row-1" style="text-align: center;margin-top: 6.25%">
@@ -58,8 +55,7 @@
         <div style="font-size: 2.2rem;text-align: left;padding: 2rem;line-height: 2.5rem;">
         <p>1.关注递四方官方服务号
             （微信号：disifang）</p>
-        <p>2.进入服务号点击菜单:
-            【帮帮牛郎】进入游戏</p>
+        <p>2.进入服务号后台回复关键字“帮帮牛郎”</p>
         <p>3.转发至朋友圈或微信群
             邀请好友一起帮忙</p>
         </div>
@@ -71,12 +67,12 @@
 <script type="text/javascript">
     <?php $apiList = array('onMenuShareQQ', 'onMenuShareWeibo','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQZone');?>
     head.ready(function(){
-        var title = '帮帮牛郎';
+        var title = '小手一抖，skype国际通话卡到手。<?php echo $this->user['nickname'];?>帮牛郎送的礼物只剩<?php echo $this->leftDistance;?>光年，快来帮忙！';
         var imgUrl = 'http://4px.ronccc.com/images/icon.png';
         var link = 'http://4px.ronccc.com/?module=game&controller=index&action=help&uid=<?php echo $this->user['id'];?>';
         var desc = '小手一抖，skype国际通话卡到手。<?php echo $this->user['nickname'];?>帮牛郎送的礼物只剩<?php echo $this->leftDistance;?>光年，快来帮忙！';
 
-        wx.config(<?php echo $this->js->config($apiList, true, true) ?>);
+        wx.config(<?php echo $this->js->config($apiList, false, true) ?>);
         wx.ready(function(){
             wx.checkJsApi({
                 jsApiList: <?php echo json_encode($apiList);?>, // 需要检测的JS接口列表，所有JS接口列表见附录2,
@@ -136,16 +132,19 @@
             [[3,2],[4,3]],
             [[7,4],[6,4.2]],
             [[9,5],[8,5.2]],
-            [[11,5],[9,5.5]],
-            [[12,5],[4,3]]
+            [[9,4],[8,5]],
+            [[11,5],[9,5.5]]
         ];
         var totalDistance = <?php echo Application\Game\Model\HelpModel::TOTAL_DISTANCE ?: 100; ?>;
         var leftDistance = <?php echo $this->leftDistance ?: 100;?>;
         var move = function(leftDistance){
-            var index = Math.floor((totalDistance - leftDistance)/(totalDistance/6));
+            var index = Math.floor(((totalDistance - leftDistance)/(totalDistance/6)));
+            console.log((totalDistance - leftDistance)/(totalDistance/6));
             var position = step[index];
-            $('.present').css({left:position[0][0]+'rem',bottom:position[0][1]+'rem'});
-            $('.girl').css({right:position[1][0]+'rem',bottom:position[1][1]+'rem'});
+            if(position){
+                $('.present').css({left:position[0][0]+'rem',bottom:position[0][1]+'rem'});
+                $('.girl').css({right:position[1][0]+'rem',bottom:position[1][1]+'rem'});
+            }
         };
         move(totalDistance);
         $('#helpBtn').on('tap',function(){
