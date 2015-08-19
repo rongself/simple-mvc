@@ -5,6 +5,8 @@ use Application\Game\Model\HelpModel;
 use Application\Game\Model\UserModel;
 use Core\AbstractController;
 use Overtrue\Wechat\Js;
+use Overtrue\Wechat\Menu;
+use Overtrue\Wechat\MenuItem;
 use Overtrue\Wechat\Message;
 use Overtrue\Wechat\Server;
 use Overtrue\Wechat\User;
@@ -29,9 +31,10 @@ class IndexController extends AbstractController
 
         $this->view->leftDistance = $leftDistance;
         $this->view->helpedTimes = $helpModel->getHelpTimes($getId);
+        $this->view->isSuccess = $leftDistance <= 0;
         $this->view->user = $model->getUserById($getId);
         $this->view->js = $js;
-        //$this->view->helper = $model->getUserById($currentUserId);
+
     }
 
     public function helpAction()
@@ -56,6 +59,27 @@ class IndexController extends AbstractController
         $this->view->helpedTimes = $helpModel->getHelpTimes($getId);
         $this->view->user = $model->getUserById($getId);
         $this->view->js = $js;
+    }
+
+    public function setMenuAction()
+    {
+        $this->view->disableRender();
+
+        $wechatConfig = $this->getConfig()->getConfig('wechat');
+        list($appId,$token,$secret,$encodingAESKey) = array_values($wechatConfig);
+
+        $menu = new Menu($appId, $secret);
+
+        $menus = array(
+            new MenuItem("帮帮牛郎", 'click', 'HELP_NIU_LANG')
+        );
+
+        try {
+            $menu->set($menus);// 请求微信服务器
+            echo '设置成功！';
+        } catch (\Exception $e) {
+            echo '设置失败：' . $e->getMessage();
+        }
     }
 
     public function addHelpAction()
@@ -139,6 +163,39 @@ class IndexController extends AbstractController
 
         $server->on('event', 'subscribe', function($event){
             return Message::make('text')->content('您好！欢迎关注 overtrue');
+        });
+
+        $server->on('event', 'click', function($message) use ($appId, $secret){
+            if($message->EventKey = 'HELP_NIU_LANG') {
+                $openId = $message->FromUserName;
+                $model = new UserModel($this->getDbAdapter());
+                $user = $model->getUserByOpenId($openId);
+                $ip = $model->getUserIP();
+                if (!$user) {
+                    $userService = new User($appId, $secret);
+                    $userInfo = $userService->get($openId);
+                    $userId = $model->createUser($openId,$openId,$ip,$userInfo->nickname);
+                }else{
+                    $userId = $user['id'];
+                }
+
+                $helpModel = new HelpModel($this->getDbAdapter());
+                $leftDistance = $helpModel->getLeftDistance($userId);
+
+                if ( $leftDistance > 0 ) {
+                    $url = 'http://examples.ronccc.com/wechatsdk/public/index.php?module=game&uid='.$userId;
+                } else {
+                    $url = 'http://examples.ronccc.com/wechatsdk/public/index.php?module=game&controller=index&action=success&openId='.$openId;
+                }
+                return Message::make('news')->items(function() use ($url){
+                    return array(
+                        Message::make('news_item')
+                            ->title('帮帮牛郎')
+                            ->url($url)
+                            ->picUrl('http://examples.ronccc.com/wechatsdk/public/images/icon.png'),
+                    );
+                });
+            }
         });
 
         // 监听所有类型

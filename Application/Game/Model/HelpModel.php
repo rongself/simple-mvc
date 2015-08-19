@@ -17,7 +17,7 @@ class HelpModel extends AbstractModel{
      * 鹊桥的长度
      */
     const TOTAL_DISTANCE = 100;
-    const HELP_TIMES = 5;
+    const HELP_TIMES = 10;
 
     public function getRandomHelpDistance($userId)
     {

@@ -1,8 +1,6 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="public/styles/default.css"/>
-    <link rel="stylesheet" type="text/css" href="public/styles/default.css"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>帮帮牛郎</title>
@@ -10,9 +8,8 @@
     <script type="text/javascript" >
         head.load(
             'http://res.wx.qq.com/open/js/jweixin-1.0.0.js',
-            'bower_components/zepto/zepto.min.js',
-            'bower_components/json2/json2.js',
-            'bower_components/zeptotouch/zepto-touch.min.js'
+            'bower_components/zepto-full/zepto.min.js',
+            'bower_components/json2/json2.js'
         );
     </script>
     <link rel="stylesheet" href="bower_components/reset-css/reset.css"/>
@@ -23,24 +20,19 @@
     <?php if ($this->isSuccess) :?>
         <div class="title"><img src="images/success.png" alt="" width="88.1%;"/></div>
         <div class="info"><?php echo $this->user['nickname'];?>已成功帮助牛郎，获得skype国际通话卡</div>
-        <div class="btn" style="text-align: center"><img src="images/to_help.png" alt="" width="78%"/></div>
+        <div class="btn join" style="text-align: center"><img src="images/to_help.png" alt="" width="78%"/></div>
     <?php else: ?>
         <div class="title"><img src="images/top.png" alt="" width="82.9%;"/></div>
         <div class="description" style="display: none;">在你的帮助下 <br/><br/>
             <?php echo $this->user['nickname'];?>帮牛郎送的礼物离织女又近了<span style="color: #ffffff">10</span>光年</div>
         <div class="rainbow" style="position: relative">
             <img src="images/ch_05.png" width="88.6%;" alt=""/>
-            <img src="images/present.png" width="16.6%;" alt="" style="position: absolute;left: 3rem;bottom: 1rem;"/>
-            <img src="images/girl-angry.png" width="22.5%;" alt="" style="position: absolute;right: 2rem;bottom: 1rem;"/>
+            <img class="present" src="images/present.png" width="16.6%;" alt="" style="position: absolute;left:3rem;bottom:1rem;display: block;"/>
+            <img class="girl" src="images/girl-angry.png" width="22.5%;" alt="" style="position: absolute;right: 2rem;bottom: 1rem;display: block;"/>
         </div>
-        <div class="info">已有<span class="num"><?php echo $this->helpedTimes;?></span>人帮助，距离完成还有<span class="left-distance" style="color: #ffffff"><?php echo $this->leftDistance;?></span>光年</div>
-        <div class="btn" id="helpBtn" style="text-align: center;position: relative;">
-            <div style="position: absolute;left: 0px;top: 0px;width: 100%;height:100%;text-align: center;line-height: 3.3rem;color: white;font-size: 1.7rem;">
-                点击帮<?php echo $this->user['nickname'];?>把牛郎的礼物送给织女
-            </div>
-            <img id="shareBtn" src="images/btn_base.png" alt="" width="78%"/>
-        </div>
-        <div class="btn" style="text-align: center"><img id="joinBtn" src="images/to_help.png" alt="" width="78%"/></div>
+        <div class="info"><?php echo $this->user['nickname'];?>已有<span class="num"><?php echo $this->helpedTimes;?></span>位好友帮助，距离完成还有<span class="left-distance" style="color: #ffffff"><?php echo $this->leftDistance;?></span>光年</div>
+        <div class="btn" style="text-align: center;margin-top: 4rem"><img id="helpBtn" src="images/help_btn.png" alt="" width="78%"/></div>
+        <div class="btn" style="text-align: center;margin-top: 2rem"><img id="joinBtn" src="images/to_help.png" alt="" width="78%"/></div>
     <?php endif; ?>
 
     <div class="footer">本活动物流赞助商：宇宙领先的递四方速递有限公司</div>
@@ -72,105 +64,51 @@
         </div>
     </div>
 </div>
-<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
-<?php $apiList = array('onMenuShareQQ', 'onMenuShareWeibo','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQZone');?>
-<script type="text/javascript" charset="utf-8">
-
+<script type="text/javascript">
     var step = [
+        [[3,1],[2,1]],
         [[3,2],[4,3]],
         [[7,4],[6,4.2]],
         [[9,5],[8,5.2]],
         [[11,5],[9,5.5]],
         [[12,5],[4,3]]
-    ]
-    var title = '帮帮牛郎';
-    var imgUrl = 'http://examples.ronccc.com/wechatsdk/public/images/icon.png';
-    var link = 'http://examples.ronccc.com/wechatsdk/public/index.php?module=game&controller=index&action=help&uid=<?php echo $this->user['id'];?>';
-    var desc = 'XXX';
-
-    wx.config(<?php echo $this->js->config($apiList, true, true) ?>);
-    wx.ready(function(){
-        wx.checkJsApi({
-            jsApiList: <?php echo json_encode($apiList);?>, // 需要检测的JS接口列表，所有JS接口列表见附录2,
-            success: function(res) {
-                // 以键值对的形式返回，可用的api值true，不可用为false
-                // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
-                if (res.checkResult.onMenuShareQQ){
-                    wx.onMenuShareQQ({
-                        title: title, // 分享标题
-                        desc: desc, // 分享描述
-                        link: link, // 分享链接
-                        imgUrl: imgUrl
-                    });
-                }
-                if (res.checkResult.onMenuShareTimeline){
-                    wx.onMenuShareTimeline({
-                        title: title, // 分享标题
-                        link: link, // 分享链接
-                        imgUrl: imgUrl // 分享图标
-                    });
-                }
-
-                if (res.checkResult.onMenuShareAppMessage){
-                    wx.onMenuShareAppMessage({
-                        title: title, // 分享标题
-                        desc: desc, // 分享描述
-                        link: link, // 分享链接
-                        imgUrl: imgUrl, // 分享图标
-                        type: 'link', // 分享类型,music、video或link，不填默认为link
-                        dataUrl: '' // 如果type是music或video，则要提供数据链接，默认为空
-                    });
-                }
-
-                if (res.checkResult.onMenuShareWeibo){
-                    wx.onMenuShareWeibo({
-                        title: title, // 分享标题
-                        desc: desc, // 分享描述
-                        link: link, // 分享链接
-                        imgUrl: imgUrl // 分享图标
-                    });
-                }
-
-                if (res.checkResult.onMenuShareQZone){
-                    wx.onMenuShareQZone({
-                        title: title, // 分享标题
-                        desc: desc, // 分享描述
-                        link: link, // 分享链接
-                        imgUrl: imgUrl // 分享图标
-                    });
-                }
-            }
-        });
-    });
+    ];
+    var totalDistance = <?php echo Application\Game\Model\HelpModel::TOTAL_DISTANCE ?: 100; ?>;
+    var leftDistance = <?php echo $this->leftDistance ?: 100;?>;
+    var move = function(leftDistance){
+        var index = Math.floor((totalDistance - leftDistance)/(totalDistance/6));
+        var position = step[index];
+        $('.present').css({left:position[0][0]+'rem',bottom:position[0][1]+'rem'});
+        $('.girl').css({right:position[1][0]+'rem',bottom:position[1][1]+'rem'});
+    };
     head.ready(function(){
         $('.close').on('tap',function(){
             $('.layer-2').hide();
         });
-        $('#joinBtn').on('tap',function(){
+        $('#joinBtn,.join').on('tap',function(){
             $('.layer-2').show();
         });
-        var disabled = false;
+        //move(leftDistance);
         $('#helpBtn').on('tap',function(){
-            if (!disabled) {
-                var url = 'http://examples.ronccc.com/wechatsdk/public/index.php?module=game&controller=index&action=addHelp';
-                $.post(url,<?php echo json_encode(array('uid'=>$this->user['id']))?>,function(ret){
-                    ret = JSON.parse(ret);
-                    if(ret.success) {
-                        if(ret.leftDistance > 0) {
-                            var num = parseInt($('info').children('span.num').text());
-                            $('.description').children('span').text(ret.distance);
-                            $('.description').show();
-                            $('info').children('span.num').text(num+1);
-                            $('info').children('span.left-distance').text(ret.leftDistance);
-                        }else{
-                            location.href = 'http://examples.ronccc.com/wechatsdk/public/index.php?module=game&&uid=<?php echo $this->user['id'];?>';
-                        }
-                    }else{
-                        alert(ret.message);
-                    }
-                    disabled = true;
-                });
-            }
+            alert();
+//            var url = '/wechatsdk/public/index.php?module=game&controller=index&action=addHelp';
+//            $.post(url,<?php //echo json_encode(array('uid'=>$this->user['id']))?>//,function(ret){
+//                ret = JSON.parse(ret);
+//                if(ret.success) {
+//                    if(ret.leftDistance > 0) {
+//                        var num = parseInt($('.info').children('span.num').text());
+//                        $('.description').children('span').text(ret.distance);
+//                        $('.description').fadeIn(300);
+//                        $('.info').children('span.num').text(num+1);
+//                        $('.info').children('span.left-distance').text(ret.leftDistance);
+//                        move(ret.leftDistance);
+//                    }else{
+//                        location.href = 'http://examples.ronccc.com/wechatsdk/public/index.php?module=game&&uid=<?php //echo $this->user['id'];?>//';
+//                    }
+//                }else{
+//                    alert(ret.message);
+//                }
+//            });
         });
     });
 </script>

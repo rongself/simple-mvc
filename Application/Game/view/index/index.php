@@ -23,7 +23,7 @@
         <div class="btn" style="text-align: center"><img src="images/to_help.png" alt="" width="78%"/></div>
     <?php else: ?>
         <div class="title"><img src="images/top.png" alt="" width="82.9%;"/></div>
-        <div class="description">牛郎的礼物离织女<span style="color: #ffffff">100</span>光年</div>
+        <div class="description">牛郎的礼物离织女<span style="color: #ffffff"><?php echo Application\Game\Model\HelpModel::TOTAL_DISTANCE; ?></span>光年</div>
         <div class="rainbow" style="position: relative">
             <img src="images/ch_05.png" width="88.6%;" alt=""/>
             <img src="images/present.png" width="16.6%;" alt="" style="position: absolute;left: 3rem;bottom: 1rem;"/>
