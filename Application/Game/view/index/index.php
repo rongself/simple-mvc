@@ -20,7 +20,7 @@
     <?php if ($this->isSuccess) :?>
         <div class="title"><img src="images/success.png" alt="" width="88.1%;"/></div>
         <div class="info"><?php echo $this->user['nickname'];?>已成功帮助牛郎，获得skype国际通话卡</div>
-        <div class="info">(注:skype国际通话卡请进入服务号领取)</div>
+        <div class="info">(注:进入公众号点击“领取skype通话卡”领取奖励)</div>
         <div class="btn" style="text-align: center"><img id="joinBtn" src="images/to_help.png" alt="" width="78%"/></div>
     <?php else: ?>
         <div class="title"><img src="images/top.png" alt="" width="82.9%;"/></div>
