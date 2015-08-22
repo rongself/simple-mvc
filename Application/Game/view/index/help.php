@@ -21,6 +21,7 @@
     <?php if ($this->isSuccess) :?>
         <div class="title"><img src="images/success.png" alt="" width="88.1%;"/></div>
         <div class="info"><?php echo $this->user['nickname'];?>已成功帮助牛郎，获得skype国际通话卡</div>
+        <div class="info">(注:进入公众号点击“领取skype通话卡”领取奖励)</div>
         <div class="btn join" style="text-align: center"><img src="images/to_help.png" alt="" width="78%"/></div>
     <?php else: ?>
         <div class="title"><img src="images/top.png" alt="" width="82.9%;"/></div>
@@ -128,7 +129,6 @@
         });
 
         var step = [
-            [[3,1],[2,1]],
             [[3,2],[4,3]],
             [[7,4],[6,4.2]],
             [[9,5],[8,5.2]],
@@ -138,8 +138,7 @@
         var totalDistance = <?php echo Application\Game\Model\HelpModel::TOTAL_DISTANCE ?: 100; ?>;
         var leftDistance = <?php echo $this->leftDistance ?: 100;?>;
         var move = function(leftDistance){
-            var index = Math.floor(((totalDistance - leftDistance)/(totalDistance/6)));
-            console.log((totalDistance - leftDistance)/(totalDistance/6));
+            var index = Math.floor(((totalDistance - leftDistance)/(totalDistance/4)));
             var position = step[index];
             if(position){
                 $('.present').css({left:position[0][0]+'rem',bottom:position[0][1]+'rem'});
