@@ -1,8 +1,8 @@
 <?php
-namespace Application\Game\Controller;
-use Application\Game\Model\CardModel;
-use Application\Game\Model\HelpModel;
-use Application\Game\Model\UserModel;
+namespace Application\Module\Game\Controller;
+use Application\Module\Game\Model\CardModel;
+use Application\Module\Game\Model\HelpModel;
+use Application\Module\Game\Model\UserModel;
 use Simple\Core\AbstractController;
 use Overtrue\Wechat\Js;
 use Overtrue\Wechat\Menu;

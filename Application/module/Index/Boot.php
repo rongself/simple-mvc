@@ -5,7 +5,7 @@
  * Date: 2015/4/10
  * Time: 0:48
  */
-namespace Application\Game;
+namespace Application\Module\Index;
 
 use Simple\Core\AbstractEvent;
 use Simple\Core\Application;
@@ -17,7 +17,7 @@ class Boot{
     {
         EventManager::getInstance()->on(AbstractEvent::CONTROLLER_DISPATCH,function($controller){
             /**@var $controller \Simple\Core\AbstractController */
-            //echo sprintf('this is index module,current controller is %s,action is %s.',$controller->getControllerName(),$controller->getActionName());
+            echo sprintf('this is index module,current controller is %s,action is %s.',$controller->getControllerName(),$controller->getActionName());
         });
     }
 

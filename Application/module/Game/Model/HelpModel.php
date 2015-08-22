@@ -6,7 +6,7 @@
  * Time: 13:23
  */
 
-namespace Application\Game\Model;
+namespace Application\Module\Game\Model;
 
 
 use Simple\Core\Model\AbstractModel;

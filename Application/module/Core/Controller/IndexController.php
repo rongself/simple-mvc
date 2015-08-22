@@ -1,5 +1,5 @@
 <?php
-namespace Application\Simple\Core\Controller;
+namespace Application\Module\Simple\Core\Controller;
 use Simple\Core\AbstractController;
 use Simple\WebSpider\KindleMi;
 

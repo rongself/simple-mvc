@@ -1,5 +1,5 @@
 <?php
-namespace Application\Game\Model;
+namespace Application\Module\Game\Model;
 
 class UserModel extends \Simple\Core\Model\AbstractModel {
 

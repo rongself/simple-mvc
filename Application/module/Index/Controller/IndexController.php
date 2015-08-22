@@ -1,5 +1,5 @@
 <?php
-namespace Application\Index\Controller;
+namespace Application\Module\Index\Controller;
 use Simple\Core\AbstractController;
 use WebSpider\KindleMi;
 use Wechat\API;
