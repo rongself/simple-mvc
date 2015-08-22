@@ -7,16 +7,16 @@
  */
 namespace Application\Game;
 
-use Core\AbstractEvent;
-use Core\Application;
-use Core\EventManager;
+use Simple\Core\AbstractEvent;
+use Simple\Core\Application;
+use Simple\Core\EventManager;
 
 class Boot{
 
     public function init()
     {
         EventManager::getInstance()->on(AbstractEvent::CONTROLLER_DISPATCH,function($controller){
-            /**@var $controller \Core\AbstractController */
+            /**@var $controller \Simple\Core\AbstractController */
             //echo sprintf('this is index module,current controller is %s,action is %s.',$controller->getControllerName(),$controller->getActionName());
         });
     }

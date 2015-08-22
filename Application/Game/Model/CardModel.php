@@ -9,7 +9,7 @@
 namespace Application\Game\Model;
 
 
-use Core\Model\AbstractModel;
+use Simple\Core\Model\AbstractModel;
 
 class CardModel extends AbstractModel {
 

@@ -1,26 +1,20 @@
 <?php
 session_start();
 error_reporting(E_ALL);
-ini_set('display_errors','off');
-defined('APPLICATION_ROOT')||define('PROJECT_ROOT',realpath(__DIR__.'/..'));
+ini_set('display_errors','on');
+defined('PROJECT_ROOT')||define('PROJECT_ROOT',realpath(__DIR__.'/..'));
 defined('LIBRARY_PATH')||define('LIBRARY_PATH',PROJECT_ROOT.'/library');
 defined('DS')||define('DS',DIRECTORY_SEPARATOR);
 set_include_path(
 	implode(PATH_SEPARATOR, array(
 		get_include_path(),
-		PROJECT_ROOT,
-		realpath(LIBRARY_PATH)
+		PROJECT_ROOT
 	))
 );
-
-spl_autoload_register(function($className){
-	include str_replace('\\',DIRECTORY_SEPARATOR,$className).'.php';
-});
-
 require __DIR__ . '/../vendor/autoload.php';
 
-$config = new \Core\Config(PROJECT_ROOT.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'application.config.php');
-$app = new \Core\Application($config);
+$config = new \Simple\Core\Config(PROJECT_ROOT.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'application.config.php');
+$app = new \Simple\Core\Application($config);
 $app->run();
 
 //\Util\RunningTimeTrack::end();

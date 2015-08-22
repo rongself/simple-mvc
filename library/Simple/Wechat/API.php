@@ -6,7 +6,7 @@
  * Time: 0:15
  */
 
-namespace Wechat;
+namespace Simple\Wechat;
 
 
 class API

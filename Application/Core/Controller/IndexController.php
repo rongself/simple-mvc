@@ -1,9 +1,7 @@
 <?php
-namespace Application\Core\Controller;
-use Core\AbstractController;
-use WebSpider\KindleMi;
-use Wechat\API;
-use Wechat\Config;
+namespace Application\Simple\Core\Controller;
+use Simple\Core\AbstractController;
+use Simple\WebSpider\KindleMi;
 
 class IndexController extends AbstractController
 {

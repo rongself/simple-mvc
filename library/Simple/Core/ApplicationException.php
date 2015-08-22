@@ -6,7 +6,7 @@
  * Time: 0:45
  */
 
-namespace Core;
+namespace Simple\Core;
 
 
 class ApplicationException extends \Exception{

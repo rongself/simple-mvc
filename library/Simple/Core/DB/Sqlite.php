@@ -6,7 +6,7 @@
  * Time: 10:26
  */
 
-namespace Core\DB;
+namespace Simple\Core\DB;
 
 
 class Sqlite extends AbstractDbAdapter{

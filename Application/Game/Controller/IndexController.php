@@ -3,7 +3,7 @@ namespace Application\Game\Controller;
 use Application\Game\Model\CardModel;
 use Application\Game\Model\HelpModel;
 use Application\Game\Model\UserModel;
-use Core\AbstractController;
+use Simple\Core\AbstractController;
 use Overtrue\Wechat\Js;
 use Overtrue\Wechat\Menu;
 use Overtrue\Wechat\MenuItem;

@@ -6,7 +6,7 @@
  * Time: 23:30
  */
 
-namespace WebSpider;
+namespace Simple\WebSpider;
 
 
 class KindleMiEbook {

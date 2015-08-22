@@ -6,7 +6,7 @@
  * Time: 0:16
  */
 
-namespace Core;
+namespace Simple\Core;
 
 
 abstract class AbstractEvent {

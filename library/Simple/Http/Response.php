@@ -6,7 +6,7 @@
  * Time: 0:51
  */
 
-namespace Http;
+namespace Simple\Http;
 
 
 class Response {

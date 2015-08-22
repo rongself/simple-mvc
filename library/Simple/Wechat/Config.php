@@ -6,7 +6,7 @@
  * Time: 0:17
  */
 
-namespace Wechat;
+namespace Simple\Wechat;
 
 
 class Config {

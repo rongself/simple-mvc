@@ -6,7 +6,7 @@
  * Time: 23:39
  */
 
-namespace Core;
+namespace Simple\Core;
 
 
 class Config {

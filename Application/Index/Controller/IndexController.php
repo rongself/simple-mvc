@@ -1,6 +1,6 @@
 <?php
 namespace Application\Index\Controller;
-use Core\AbstractController;
+use Simple\Core\AbstractController;
 use WebSpider\KindleMi;
 use Wechat\API;
 use Wechat\Config;

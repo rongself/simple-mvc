@@ -1,7 +1,7 @@
 <?php
 namespace Application\Game\Model;
 
-class UserModel extends \Core\Model\AbstractModel {
+class UserModel extends \Simple\Core\Model\AbstractModel {
 
     public function getUsers()
     {

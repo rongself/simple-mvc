@@ -6,7 +6,7 @@
  * Time: 2:01
  */
 
-namespace Core;
+namespace Simple\Core;
 class Router {
 
     protected $uri;

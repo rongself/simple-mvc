@@ -1,7 +1,7 @@
 <?php
 return array(
     'applicationNamespace' => 'Application',
-    'viewDir' => '/view',
+    'viewDir' => DS.'view',
     'routerOptions'  => array(
         'defaultModule' => 'game',
         'defaultController' => 'index',
@@ -10,7 +10,7 @@ return array(
     'db' => array(
         'default' => 'sqlite',
         'sqlite' => array(
-            'class' => 'Core\DB\Sqlite',
+            'class' => 'Simple\Core\DB\Sqlite',
             'path' => PROJECT_ROOT.'/data/db/dsf_game_wechat.s3db',
         )
     ),

@@ -6,7 +6,7 @@
  * Time: 23:21
  */
 
-namespace Http;
+namespace Simple\Http;
 
 
 class Client {

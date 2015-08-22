@@ -7,8 +7,8 @@
  */
 namespace Application\Core;
 
-use Core\AbstractEvent;
-use Core\Application;
+use Simple\Core\AbstractEvent;
+use Simple\Core\Application;
 
 class Boot{
 

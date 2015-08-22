@@ -11,5 +11,11 @@
     "minimum-stability": "dev",
     "require": {
         "overtrue/wechat": "2.0.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Simple\\": "library/Simple/",
+            "Application\\": "Application/"
+        }
     }
 }

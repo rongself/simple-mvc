@@ -6,7 +6,7 @@
  * Time: 0:51
  */
 
-namespace Core;
+namespace Simple\Core;
 
 
 class EventManager {

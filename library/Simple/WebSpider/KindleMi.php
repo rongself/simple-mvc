@@ -6,10 +6,10 @@
  * Time: 1:58
  */
 
-namespace WebSpider;
+namespace Simple\WebSpider;
 
 
-use Http\Client;
+use Simple\Http\Client;
 
 class KindleMi extends Client{
 

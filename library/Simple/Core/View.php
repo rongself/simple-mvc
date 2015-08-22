@@ -6,7 +6,7 @@
  * Time: 22:27
  */
 
-namespace Core;
+namespace Simple\Core;
 
 
 class View {

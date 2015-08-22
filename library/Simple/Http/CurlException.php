@@ -6,8 +6,7 @@
  * Time: 23:44
  */
 
-namespace Http;
-
+namespace Simple\Http;
 
 class CurlException extends \Exception{
     public function __construct($message)

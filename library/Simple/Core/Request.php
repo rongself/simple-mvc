@@ -6,7 +6,7 @@
  * Time: 23:12
  */
 
-namespace Core;
+namespace Simple\Core;
 
 
 class Request extends \HttpRequest{

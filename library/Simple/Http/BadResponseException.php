@@ -6,7 +6,7 @@
  * Time: 1:00
  */
 
-namespace Http;
+namespace Simple\Http;
 
 
 class BadResponseException extends \Exception {

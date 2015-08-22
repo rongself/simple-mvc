@@ -7,9 +7,9 @@
  */
 namespace Application;
 
-use Core\AbstractEvent;
-use Core\BootManager;
-use Core\EventManager;
+use Simple\Core\AbstractEvent;
+use Simple\Core\BootManager;
+use Simple\Core\EventManager;
 
 class Boot {
 
@@ -18,10 +18,10 @@ class Boot {
         $config = $bootManager->config->getConfig('db');
         $defaultDbConfig = $config[$config['default']];
         EventManager::getInstance()->on(AbstractEvent::CONTROLLER_DISPATCH,function($controller) use ($defaultDbConfig){
-            /**@var $controller \Core\AbstractController */
+            /**@var $controller \Simple\Core\AbstractController */
             try{
                 $ref = new \ReflectionClass($defaultDbConfig['class']);
-                $ref->isSubclassOf('\Core\DB\AbstractDbAdapter');
+                $ref->isSubclassOf('\Simple\Core\DB\AbstractDbAdapter');
                 $controller->setDbAdapter($ref->newInstance($defaultDbConfig['path']));
 
             }catch (\ReflectionException $e){

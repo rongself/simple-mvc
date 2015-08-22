@@ -6,7 +6,7 @@
  * Time: 10:25
  */
 
-namespace Core\DB;
+namespace Simple\Core\DB;
 
 
 abstract class AbstractDbAdapter {

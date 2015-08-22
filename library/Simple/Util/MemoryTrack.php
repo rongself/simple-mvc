@@ -6,7 +6,7 @@
  * Time: 23:01
  */
 
-namespace Util;
+namespace Simple\Util;
 
 
 class MemoryTrack {

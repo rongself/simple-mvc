@@ -6,10 +6,10 @@
  * Time: 12:13
  */
 
-namespace Core\Model;
+namespace Simple\Core\Model;
 
 
-use Core\DB\AbstractDbAdapter;
+use Simple\Core\DB\AbstractDbAdapter;
 
 class AbstractModel {
 

@@ -6,7 +6,7 @@
  * Time: 1:59
  */
 
-namespace Core;
+namespace Simple\Core;
 
 
 abstract class AbstractController {
@@ -16,12 +16,12 @@ abstract class AbstractController {
     protected $params;
     protected $config;
     /**
-     * @var \Core\DB\AbstractDbAdapter
+     * @var \Simple\Core\DB\AbstractDbAdapter
      */
     protected $dbAdapter;
 
     /**
-     * @var $view \Core\View
+     * @var $view \Simple\Simple\Core\View
      */
     protected $view;
 
@@ -78,7 +78,7 @@ abstract class AbstractController {
     }
 
     /**
-     * @return \Core\View
+     * @return \Simple\Core\View
      */
     public function getView()
     {

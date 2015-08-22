@@ -6,7 +6,7 @@
  * Time: 1:32
  */
 
-namespace Core;
+namespace Simple\Core;
 
 class Application
 {

@@ -6,7 +6,7 @@
  * Time: 22:49
  */
 
-namespace Util;
+namespace Simple\Util;
 
 
 class RunningTimeTrack {
