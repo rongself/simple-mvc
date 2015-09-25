@@ -8,7 +8,6 @@
 namespace Application\Module\Game;
 
 use Simple\Core\AbstractEvent;
-use Simple\Core\Application;
 use Simple\Core\EventManager;
 
 class Boot{
