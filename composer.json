@@ -15,7 +15,8 @@
     "autoload": {
         "psr-4": {
             "Simple\\": "library/Simple/",
-            "Application\\": "Application/"
+            "Application\\": "Application/",
+            "Application\\Module\\": "Application/module/"
         }
     }
 }

@@ -10,6 +10,9 @@ namespace Simple\Core;
 
 
 class View {
+    /**
+     * @var string
+     */
     protected $viewPath;
     protected $dataContainer = array();
     public $controllerName;
@@ -39,6 +42,9 @@ class View {
         $this->dataContainer[$key] = $value;
     }
 
+    /**
+     * @return string
+     */
     public function render()
     {
         if (!$this->disableRender) {
@@ -60,7 +66,8 @@ class View {
     }
 
     /**
-     * @param array $dataContainer
+     * @param array $values
+     * @internal param array $dataContainer
      */
     public function setValues(array $values)
     {

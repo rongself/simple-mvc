@@ -10,6 +10,7 @@ use Overtrue\Wechat\MenuItem;
 use Overtrue\Wechat\Message;
 use Overtrue\Wechat\Server;
 use Overtrue\Wechat\User;
+use Overtrue\Wechat\Media;
 
 class IndexController extends AbstractController
 {
@@ -128,7 +129,9 @@ class IndexController extends AbstractController
 
     public function useAction()
     {
-
+        $wechatConfig = $this->getConfig()->getConfig('wechat');
+        list($appId,$token,$secret,$encodingAESKey) = array_values($wechatConfig);
+        $media = new Media($appId, $secret);
     }
 
     public function successAction()

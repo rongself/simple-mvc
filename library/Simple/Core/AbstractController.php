@@ -21,7 +21,7 @@ abstract class AbstractController {
     protected $dbAdapter;
 
     /**
-     * @var $view \Simple\Simple\Core\View
+     * @var $view \Simple\Core\View
      */
     protected $view;
 

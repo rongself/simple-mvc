@@ -40,7 +40,7 @@ class EventManager {
 
     }
 
-    public function on($event,\Closure $callback)
+    public function on($event,callable $callback)
     {
         if(in_array($event,AbstractEvent::$eventTypes)){
             $this->evens[$event][] = $callback;
